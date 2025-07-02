@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master C Programming - Comprehensive Learning Resource</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --text: #333;
+            --text-light: #7f8c8d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+            line-height: 1.8;
+            color: var(--text);
+            background-color: #f9f9f9;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
+            background-size: 40px 40px;
+            opacity: 0.3;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            display: inline-block;
+            padding: 0 1rem;
+            background-color: #f9f9f9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #ddd;
+            z-index: 0;
+        }
+        
+        /* Learning Path */
+        .learning-path {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .module {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #eee;
+        }
+        
+        .module:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .module-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+        }
+        
+        .module-number {
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            background-color: var(--accent);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+        }
+        
+        .module-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .module-body {
+            padding: 1.5rem;
+        }
+        
+        .topics-list {
+            list-style: none;
+        }
+        
+        .topics-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .topics-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .topics-list li::before {
+            content: '\f054';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--secondary);
+            margin-right: 1rem;
+            font-size: 0.8rem;
+        }
+        
+        /* Code Examples */
+        .code-section {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 3rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .code-header {
+            background-color: #252526;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+        
+        .code-dots {
+            display: flex;
+            margin-right: 1rem;
+        }
+        
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        
+        .code-dot.red {
+            background-color: #ff5f56;
+        }
+        
+        .code-dot.yellow {
+            background-color: #ffbd2e;
+        }
+        
+        .code-dot.green {
+            background-color: #27c93f;
+        }
+        
+        .code-filename {
+            color: #d4d4d4;
+            font-size: 0.9rem;
+        }
+        
+        pre {
+            margin: 0;
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+        
+        code {
+            font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #d4d4d4;
+        }
+        
+        .token.comment {
+            color: #6a9955;
+        }
+        
+        .token.keyword {
+            color: #569cd6;
+        }
+        
+        .token.function {
+            color: #dcdcaa;
+        }
+        
+        .token.operator {
+            color: #d4d4d4;
+        }
+        
+        .token.string {
+            color: #ce9178;
+        }
+        
+        /* Resources */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .resource-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .resource-card h4 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .resource-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .resource-link i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .resource-link:hover i {
+            transform: translateX(3px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h4 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin-right: 0.8rem;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+            }
+            
+            .nav-links li {
+                margin: 0 0.8rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <h1>Master C Programming</h1>
+            <p class="tagline">The definitive resource for learning C programming from the ground up. Build a rock-solid foundation in systems programming and software development.</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-code"></i>
+                C Mastery
+            </a>
+            <ul class="nav-links">
+                <li><a href="#learning-path">Learning Path</a></li>
+                <li><a href="#examples">Code Examples</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#practice">Practice</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main class="main-content">
+        <div class="container">
+            <section id="learning-path">
+                <div class="section-title">
+                    <h2>Structured Learning Path</h2>
+                </div>
+                
+                <div class="learning-path">
+                    <!-- Module 1 -->
+                    <div class="module">
+                        <div class="module-header">
+                            <div class="module-number">1</div>
+                            <h3>Fundamentals of C</h3>
+                            <p>Core concepts and syntax</p>
+                        </div>
+                        <div class="module-body">
+                            <ul class="topics-list">
+                                <li>History and philosophy of C</li>
+                                <li>Compilation process explained</li>
+                                <li>Data types and variables</li>
+                                <li>Operators and expressions</li>
+                                <li>Basic I/O operations</li>
+                                <li>Preprocessor directives</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Module 2 -->
+                    <div class="module">
+                        <div class="module-header">
+                            <div class="module-number">2</div>
+                            <h3>Control Structures</h3>
+                            <p>Program flow and logic</p>
+                        </div>
+                        <div class="module-body">
+                            <ul class="topics-list">
+                                <li>Conditional statements (if, else)</li>
+                                <li>Switch-case statements</li>
+                                <li>Loop structures (for, while, do-while)</li>
+                                <li>Break and continue</li>
+                                <li>Nested control structures</li>
+                                <li>Error handling basics</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Module 3 -->
+                    <div class="module">
+                        <div class="module-header">
+                            <div class="module-number">3</div>
+                            <h3>Functions & Modularity</h3>
+                            <p>Building reusable code</p>
+                        </div>
+                        <div class="module-body">
+                            <ul class="topics-list">
+                                <li>Function declaration and definition</li>
+                                <li>Parameters and return values</li>
+                                <li>Scope and lifetime of variables</li>
+                                <li>Recursion principles</li>
+                                <li>Header files and modular design</li>
+                                <li>Static functions and variables</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Module 4 -->
+                    <div class="module">
+                        <div class="module-header">
+                            <div class="module-number">4</div>
+                            <h3>Arrays & Pointers</h3>
+                            <p>Memory manipulation</p>
+                        </div>
+                        <div class="module-body">
+                            <ul class="topics-list">
+                                <li>Array declaration and usage</li>
+                                <li>Pointer fundamentals</li>
+                                <li>Pointer arithmetic</li>
+                                <li>Arrays and pointer relationship</li>
+                                <li>Dynamic memory allocation</li>
+                                <li>Common pointer pitfalls</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Module 5 -->
+                    <div class="module">
+                        <div class="module-header">
+                            <div class="module-number">5</div>
+                            <h3>Structures & Files</h3>
+                            <p>Data organization</p>
+                        </div>
+                        <div class="module-body">
+                            <ul class="topics-list">
+                                <li>Structure declaration and usage</li>
+                                <li>Unions and bit-fields</li>
+                                <li>File handling operations</li>
+                                <li>Binary vs text files</li>
+                                <li>Random access files</li>
+                                <li>Data serialization</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Module 6 -->
+                    <div class="module">
+                        <div class="module-header">
+                            <div class="module-number">6</div>
+                            <h3>Advanced Concepts</h3>
+                            <p>Going beyond basics</p>
+                        </div>
+                        <div class="module-body">
+                            <ul class="topics-list">
+                                <li>Function pointers</li>
+                                <li>Multi-file projects</li>
+                                <li>Build systems (Makefiles)</li>
+                                <li>Memory management techniques</li>
+                                <li>Introduction to data structures</li>
+                                <li>Performance optimization</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="examples">
+                <div class="section-title">
+                    <h2>Practical Code Examples</h2>
+                </div>
+                
+                <div class="code-section">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <div class="code-dot red"></div>
+                            <div class="code-dot yellow"></div>
+                            <div class="code-dot green"></div>
+                        </div>
+                        <div class="code-filename">pointer_example.c</div>
+                    </div>
+                    <pre><code><span class="token comment">// Pointer arithmetic example</span>
+<span class="token keyword">#include</span> <span class="token operator">&lt;</span><span class="token keyword">stdio</span><span class="token operator">.</span><span class="token keyword">h</span><span class="token operator">&gt;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">40</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>ptr <span class="token operator">=</span> arr<span class="token punctuation">;</span>  <span class="token comment">// Pointer to first element</span>
+    
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Initial address: %p, value: %d\n"</span><span class="token punctuation">,</span> ptr<span class="token punctuation">,</span> <span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    ptr<span class="token operator">++</span><span class="token punctuation">;</span>  <span class="token comment">// Move to next element</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"After increment: %p, value: %d\n"</span><span class="token punctuation">,</span> ptr<span class="token punctuation">,</span> <span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    ptr <span class="token operator">+=</span> <span class="token number">2</span><span class="token punctuation">;</span>  <span class="token comment">// Move forward by 2 elements</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"After adding 2: %p, value: %d\n"</span><span class="token punctuation">,</span> ptr<span class="token punctuation">,</span> <span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+                </div>
+                
+                <div class="code-section">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <div class="code-dot red"></div>
+                            <div class="code-dot yellow"></div>
+                            <div class="code-dot green"></div>
+                        </div>
+                        <div class="code-filename">dynamic_array.c</div>
+                    </div>
+                    <pre><code><span class="token comment">// Dynamic memory allocation example</span>
+<span class="token keyword">#include</span> <span class="token operator">&lt;</span><span class="token keyword">stdio</span><span class="token operator">.</span><span class="token keyword">h</span><span class="token operator">&gt;</span>
+<span class="token keyword">#include</span> <span class="token operator">&lt;</span><span class="token keyword">stdlib</span><span class="token operator">.</span><span class="token keyword">h</span><span class="token operator">&gt;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>dynamicArray<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> size<span class="token punctuation">;</span>
+    
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Enter array size: "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// Allocate memory</span>
+    dynamicArray <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span>size <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>dynamicArray <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Memory allocation failed!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">// Initialize array</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        dynamicArray<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> i <span class="token operator">*</span> <span class="token number">10</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">// Print array</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d "</span><span class="token punctuation">,</span> dynamicArray<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// Free allocated memory</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>dynamicArray<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+                </div>
+            </section>
+            
+            <section id="resources">
+                <div class="section-title">
+                    <h2>Learning Resources</h2>
+                </div>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>Official Documentation</h4>
+                        <p>Comprehensive C language reference from the ISO C Standard Committee.</p>
+                        <a href="#" class="resource-link">Explore Docs <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <h4>Interactive Exercises</h4>
+                        <p>Hands-on coding challenges to practice C programming concepts.</p>
+                        <a href="#" class="resource-link">Start Practicing <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <h4>Video Tutorials</h4>
+                        <p>Curated collection of high-quality C programming video lessons.</p>
+                        <a href="#" class="resource-link">Watch Now <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <h4>Community Forum</h4>
+                        <p>Connect with other learners and get help from experienced developers.</p>
+                        <a href="#" class="resource-link">Join Discussion <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <h4>Project Ideas</h4>
+                        <p>Real-world project suggestions to apply your C programming skills.</p>
+                        <a href="#" class="resource-link">Browse Projects <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <h4>Cheat Sheets</h4>
+                        <p>Quick reference guides for C syntax, functions, and common patterns.</p>
+                        <a href="#" class="resource-link">Download PDFs <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    
+            
+            
+            <div class="copyright">
+                <p>&copy; 2023 C Mastery. All rights reserved. The content on this website is for educational purposes only.</p>
+            </div>
+                </div>
+        </div></div>
+    </footer>
+</body>
+      </html>
