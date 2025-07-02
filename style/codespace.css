@@ -1,4 +1,4 @@
- <style>
+ 
     :root {
       --primary-color: #2563eb;
       --primary-dark: #1d4ed8;
@@ -424,4 +424,4 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #475569;
     }
-  </style>
+ 
